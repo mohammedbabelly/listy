@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:listy/src/sample_feature/sample_item.dart';
+import 'package:realm/realm.dart';
 
 import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
@@ -9,12 +11,11 @@ import 'settings/settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
-  const MyApp({
-    super.key,
-    required this.settingsController,
-  });
+  const MyApp(
+      {super.key, required this.settingsController, required this.allItems});
 
   final SettingsController settingsController;
+  final RealmResults<SampleItem> allItems;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +74,7 @@ class MyApp extends StatelessWidget {
                     return const SampleItemDetailsView();
                   case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return SampleItemListView(bloc: ListBloc(allItems));
                 }
               },
             );

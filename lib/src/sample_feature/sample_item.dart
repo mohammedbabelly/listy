@@ -1,6 +1,11 @@
-/// A placeholder class that represents an entity or model.
-class SampleItem {
-  const SampleItem(this.id);
+import 'package:realm/realm.dart';
+part 'sample_item.g.dart';
 
-  final int id;
+/// A placeholder class that represents an entity or model.
+@RealmModel()
+class _SampleItem {
+  @PrimaryKey()
+  @MapTo("_id")
+  late ObjectId id;
+  late int no;
 }
